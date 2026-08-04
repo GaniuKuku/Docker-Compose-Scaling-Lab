@@ -14,7 +14,7 @@
 
 <br>
 
-![Docker Compose Architecture](./architecture.png)
+![Docker Compose Architecture](asset/architecture.png)
 
 </div>
 
@@ -126,9 +126,20 @@ The environment was built iteratively to understand the purpose of each componen
 
 * **Stage 1 | Single Container** <br> Containerizing the base Flask application to ensure the Python runtime and dependencies were packaged correctly.
 * **Stage 2 | Database Integration** <br> Introducing PostgreSQL and verifying database connections via environment variables.
+
+  ![Database Connection](asset/db.png)
+  
 * **Stage 3 | Docker Compose** <br> Transitioning from manual `docker run` commands to a declarative `docker-compose.yml` file to manage both services simultaneously.
 * **Stage 4 | Reverse Proxy** <br> Adding Nginx to the network to act as a traffic director in front of the application layer.
 * **Stage 5 | Scaling** <br> Utilizing Docker Compose to scale the Flask application to multiple replicas and configuring Nginx to route to the upstream pool.
+
+<p align="center">
+<img src="asset/c1.png" width="32%">
+<img src="asset/c2.png" width="32%">
+<img src="asset/c3.png" width="32%">
+</p>
+
+
 * **Stage 6 | Failure Simulation** <br> Intentionally killing active containers during request cycles to observe system resilience.
 
 <br>
