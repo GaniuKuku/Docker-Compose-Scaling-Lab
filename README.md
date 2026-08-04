@@ -145,6 +145,40 @@ The environment was built iteratively to understand the purpose of each componen
 ![Container Failure](asset/web2.png)
 
 
+<br>
+
+---
+
+<br>
+
+
+## Challenges Encountered
+
+During the initial deployment, PostgreSQL failed to start because the required environment variables were not loaded correctly.
+
+
+![PostgreSQL Error](asset/e1.png)
+
+
+The issue was traced back to the location of the `.env` file. Once it was moved to the project root, Docker Compose successfully injected the required environment variables into the PostgreSQL container.
+
+Also, during the initial single container build, the Flask container started and immediately exited with `code 0`.
+
+At first, this was confusing because `code 0` normally indicates that a process completed successfully. The issue was that the Flask application had been defined, but there was nothing telling Python to actually start the web server.
+
+The missing application entry point was:
+
+```python
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
+```
+
+This acts as the "ignition switch" for the application. It tells Python to start the Flask development server when app.py is executed directly.
+
+The host="0.0.0.0" setting was also important because the application was running inside a Docker container. Binding Flask to 0.0.0.0 allows it to accept connections from outside the container through Docker's networking and port mapping.
+
+After adding the entry point, the container remained running and the application became accessible through the exposed port.
+
 
 <br>
 
