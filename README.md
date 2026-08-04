@@ -83,7 +83,7 @@ This project was designed to:
 
 ## 🏗️ Architecture
 
-The architecture routes all external internet traffic through an Nginx reverse proxy. Nginx acts as the single entry point and distributes incoming requests across three isolated Flask application containers. These application containers communicate over a private Docker network to a single, shared PostgreSQL database volume.
+The architecture routes incoming HTTP requests through an Nginx reverse proxy, which acts as the single entry point to the application layer. Nginx distributes requests across three isolated Flask application containers. The application containers communicate with PostgreSQL through a private Docker network, while persistent database data is stored in a Docker volume.
 
 <br>
 
@@ -194,6 +194,20 @@ After adding the entry point, the container remained running and the application
 * **Observation 3:** Displaying the container hostname in each response provided visual confirmation that requests were reaching different replicas.
 * **Observation 4:** Stopping one application replica did not interrupt service because Nginx continued routing requests to the remaining healthy containers.
 * **Observation 5:** Docker Compose does not automatically recreate failed replicas, highlighting a key difference between Compose and orchestration platforms such as Docker Swarm or Kubernetes.
+
+<br>
+
+## ❓ Questions Answered
+
+The experiment was originally built around several practical questions about Docker Compose scaling. The observations from the project helped clarify them.
+
+| Question | What the experiment showed |
+| :--- | :--- |
+| **Does Docker Compose automatically load balance requests?** | Docker Compose can run multiple instances of a service, but it does not by itself provide the application-level reverse proxy behaviour demonstrated here. Nginx was introduced as the single entry point responsible for distributing incoming requests across the Flask replicas. |
+| **Why use a reverse proxy?** | Nginx provides a single entry point for clients while forwarding requests to the backend application containers. This means clients do not need to know which replica is handling a request. |
+| **How can I tell which container handled a request?** | The Flask application returns its container hostname in the response. Because Docker assigns the container identifier as the default hostname in this setup, different identifiers appeared as requests were handled by different replicas. |
+| **What happens when one replica is stopped?** | The application remained accessible because the other Flask replicas were still running and Nginx continued forwarding requests to the available application instances. |
+| **Does Docker Compose automatically recreate a stopped replica?** | No. The experiment showed that stopping a container reduces the number of running replicas. Maintaining a desired replica count through automatic reconciliation is a capability associated with container orchestration platforms such as Docker Swarm and Kubernetes. |
 
 <br>
 
