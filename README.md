@@ -142,6 +142,10 @@ The environment was built iteratively to understand the purpose of each componen
 
 * **Stage 6 | Failure Simulation** <br> Intentionally killing active containers during request cycles to observe system resilience.
 
+![Container Failure](asset/web2.png)
+
+
+
 <br>
 
 ---
