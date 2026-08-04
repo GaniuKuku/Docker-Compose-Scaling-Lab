@@ -137,6 +137,7 @@ The environment was built iteratively to understand the purpose of each componen
 <img src="asset/c1.png" width="32%">
 <img src="asset/c2.png" width="32%">
 <img src="asset/c3.png" width="32%">
+<img src="asset/all.png" width="32%">
 </p>
 
 
