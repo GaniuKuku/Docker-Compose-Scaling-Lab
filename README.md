@@ -220,6 +220,44 @@ The experiment was originally built around several practical questions about Doc
 
 <br>
 
+## 📚 Relevant Documentation & Further Reading
+
+The following resources provide official documentation for the technologies and concepts used throughout this project. They are included for anyone who wants to understand the underlying concepts beyond this experiment.
+
+### Docker & Docker Compose
+
+* [Docker Compose Documentation](https://docs.docker.com/compose/)
+  * Official documentation for defining and managing multi container applications with Docker Compose.
+
+* [docker compose up Reference](https://docs.docker.com/reference/cli/docker/compose/up/)
+  * Explains how Compose creates, starts, recreates, and manages services.
+
+* [Compose Networking](https://docs.docker.com/compose/how-tos/networking/)
+  * Explains Docker's default Compose network, service discovery, and communication between containers using service names.
+
+* [Compose File Services Reference](https://docs.docker.com/reference/compose-file/services/)
+  * Reference for defining and configuring services in a Compose file.
+
+### Docker Storage
+
+* [Docker Volumes](https://docs.docker.com/engine/storage/volumes/)
+  * Explains how Docker volumes provide persistent storage beyond the lifecycle of individual containers.
+
+### Nginx
+
+* [NGINX Reverse Proxy](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/)
+  * Explains reverse proxying, request forwarding, upstream servers, and how NGINX can distribute requests across multiple application servers.
+
+### Application & Database
+
+* [Flask Documentation](https://flask.palletsprojects.com/en/stable/)
+  * Official documentation for the Flask web framework used for the application layer.
+
+* [PostgreSQL Docker Image](https://hub.docker.com/_/postgres)
+  * Official Docker image documentation for running PostgreSQL in containers.
+
+<br>
+
 ## 🔮 Future Work
 
 This project serves as a foundation for a highly available, observable, production-ready containerized web platform. The next phases of development will include:
